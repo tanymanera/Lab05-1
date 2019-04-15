@@ -1,11 +1,18 @@
 package it.polito.tdp.anagrammi.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import it.polito.tdp.anagrammi.db.ParolaDAO;
 
 public class GeneraAnagrammi {
 
 	private static Set<String> listAnagrammi;
+	private static List<String> corretti;
+	private static List<String> errati;
+	private static ParolaDAO dao;
 	
 	private void anagrammaRicorsivo(StringBuilder parziale, StringBuilder restanti) {
 		/*
@@ -51,13 +58,39 @@ public class GeneraAnagrammi {
 		}
 
 	}
-	
-	public Set<String> GeneraAnagramma(String parola) {
+	/**
+	 * questo metodo fa un po' troppe cose:
+	 * 	1.inizializza tutte le proprietà (cosa che dovrebbe fare un costruttore)
+	 * 	2.fa partire la ricorsione chiamando anagrammaRicorsivo -ricorsione livello zero
+	 * 	3.popola le due liste che contengono le parole corrette ed errate con chiamata a dao
+	 * 	4.visto che le liste sono due, devono essere lette con appositi getters.
+	 * 
+	 * @param parola Stringa da anagrammare - non deve contenere spazi.
+	 */
+	public void generaAnagramma(String parola) {
 		listAnagrammi = new HashSet<String>();
+		corretti = new ArrayList<>();
+		errati = new ArrayList<>(); 
+		dao = new ParolaDAO();
 		StringBuilder parziale = new StringBuilder("");
 		StringBuilder restanti = new StringBuilder(parola);
 		anagrammaRicorsivo(parziale, restanti);
-		return listAnagrammi;
+		
+		for(String s: listAnagrammi) {
+			if(dao.isCorrect(s)) {
+				corretti.add(s);
+			} else {
+				errati.add(s);
+			}
+		}
 	}
 
+	public static List<String> getCorretti() {
+		return corretti;
+	}
+
+	public static List<String> getErrati() {
+		return errati;
+	}
+	
 }

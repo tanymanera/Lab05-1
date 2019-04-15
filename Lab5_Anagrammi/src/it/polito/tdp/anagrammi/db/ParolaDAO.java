@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class parolaDAO {
+public class ParolaDAO {
 	
 	public boolean isCorrect(String anagramma) {
 		

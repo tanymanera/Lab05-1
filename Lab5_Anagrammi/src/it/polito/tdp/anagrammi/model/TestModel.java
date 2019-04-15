@@ -2,26 +2,19 @@ package it.polito.tdp.anagrammi.model;
 
 import java.util.Set;
 
-import it.polito.tdp.anagrammi.db.parolaDAO;
+import it.polito.tdp.anagrammi.db.ParolaDAO;
 
 public class TestModel {
 	
 	private void runTest() {
 		GeneraAnagrammi ga = new GeneraAnagrammi();
-		parolaDAO dao = new parolaDAO();
-		Set<String> lista = ga.GeneraAnagramma("eat");
-		System.out.println(lista);
-		lista = ga.GeneraAnagramma("atta");
-		System.out.println(lista);
-		for(String anagramma: lista) {
-			if(dao.isCorrect(anagramma)) {
-				System.out.println(String.format("la parola %s è corretta.",
-						anagramma));
-			} else {
-				System.out.println(String.format("la parola %s non esiste.",
-						anagramma));
-			}
-		}
+		
+		ga.generaAnagramma("eat");
+		System.out.println(String.format("Parole corrette: %s", GeneraAnagrammi.getCorretti().toString()));
+		System.out.println(String.format("Parole errate: %s", GeneraAnagrammi.getErrati().toString()));
+		ga.generaAnagramma("atta");
+		System.out.println(String.format("Parole corrette: %s", GeneraAnagrammi.getCorretti().toString()));
+		System.out.println(String.format("Parole errate: %s", GeneraAnagrammi.getErrati().toString()));
 	}
 
 	public static void main(String[] args) {
