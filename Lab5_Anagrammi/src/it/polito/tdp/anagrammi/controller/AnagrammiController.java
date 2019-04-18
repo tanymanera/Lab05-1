@@ -1,6 +1,7 @@
 package it.polito.tdp.anagrammi.controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.anagrammi.model.GeneraAnagrammi;
@@ -39,11 +40,13 @@ public class AnagrammiController {
     		txtInsert.clear();
     		return;
     	}
-    	model.generaAnagramma(parola);
-    	for(String corretta: GeneraAnagrammi.getCorretti()) {
+    	List<String>[] result = model.generaAnagramma(parola);
+    	List<String> errati = result[0];
+    	List<String> corretti = result[1];
+    	for(String corretta: corretti) {
     		txtCorretti.appendText(corretta + "\n");
     	}
-    	for(String errata: GeneraAnagrammi.getErrati()) {
+    	for(String errata: errati) {
     		txtErrati.appendText(errata + "\n");
     	}
     }

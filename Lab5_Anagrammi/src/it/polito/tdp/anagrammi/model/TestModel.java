@@ -1,5 +1,6 @@
 package it.polito.tdp.anagrammi.model;
 
+import java.util.List;
 import java.util.Set;
 
 import it.polito.tdp.anagrammi.db.ParolaDAO;
@@ -9,12 +10,12 @@ public class TestModel {
 	private void runTest() {
 		GeneraAnagrammi ga = new GeneraAnagrammi();
 		
-		ga.generaAnagramma("eat");
-		System.out.println(String.format("Parole corrette: %s", GeneraAnagrammi.getCorretti().toString()));
-		System.out.println(String.format("Parole errate: %s", GeneraAnagrammi.getErrati().toString()));
-		ga.generaAnagramma("atta");
-		System.out.println(String.format("Parole corrette: %s", GeneraAnagrammi.getCorretti().toString()));
-		System.out.println(String.format("Parole errate: %s", GeneraAnagrammi.getErrati().toString()));
+		List<String>[] result = ga.generaAnagramma("eat");
+		System.out.println(String.format("Parole corrette: %s", result[1].toString()));
+		System.out.println(String.format("Parole errate: %s", result[0].toString()));
+		result = ga.generaAnagramma("atta");
+		System.out.println(String.format("Parole corrette: %s", result[1].toString()));
+		System.out.println(String.format("Parole errate: %s", result[0].toString()));
 	}
 
 	public static void main(String[] args) {

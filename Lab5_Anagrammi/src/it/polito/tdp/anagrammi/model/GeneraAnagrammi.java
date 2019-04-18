@@ -10,8 +10,6 @@ import it.polito.tdp.anagrammi.db.ParolaDAO;
 public class GeneraAnagrammi {
 
 	private static Set<String> listAnagrammi;
-	private static List<String> corretti;
-	private static List<String> errati;
 	private static ParolaDAO dao;
 	
 	private void anagrammaRicorsivo(StringBuilder parziale, StringBuilder restanti) {
@@ -63,14 +61,15 @@ public class GeneraAnagrammi {
 	 * 	1.inizializza tutte le proprietà (cosa che dovrebbe fare un costruttore)
 	 * 	2.fa partire la ricorsione chiamando anagrammaRicorsivo -ricorsione livello zero
 	 * 	3.popola le due liste che contengono le parole corrette ed errate con chiamata a dao
-	 * 	4.visto che le liste sono due, devono essere lette con appositi getters.
+	 * 	4.visto che le liste sono due, viene creato un vettorino.
 	 * 
 	 * @param parola Stringa da anagrammare - non deve contenere spazi.
 	 */
-	public void generaAnagramma(String parola) {
+	public List<String>[] generaAnagramma(String parola) {
 		listAnagrammi = new HashSet<String>();
-		corretti = new ArrayList<>();
-		errati = new ArrayList<>(); 
+		List<String> corretti = new ArrayList<>();
+		List<String> errati = new ArrayList<>();
+		List<String>[] result = new ArrayList[2];
 		dao = new ParolaDAO();
 		StringBuilder parziale = new StringBuilder("");
 		StringBuilder restanti = new StringBuilder(parola);
@@ -83,14 +82,10 @@ public class GeneraAnagrammi {
 				errati.add(s);
 			}
 		}
+		result[0] = errati;
+		result[1] = corretti;
+		
+		return result;
 	}
 
-	public static List<String> getCorretti() {
-		return corretti;
-	}
-
-	public static List<String> getErrati() {
-		return errati;
-	}
-	
 }
