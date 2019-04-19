@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import it.polito.tdp.anagrammi.db.ParolaDAO;
+import javafx.concurrent.Task;
 
 public class GeneraAnagrammi {
 
-	private static Set<String> listAnagrammi;
+	private Set<String> listAnagrammi;
 	private static ParolaDAO dao;
 	
 	private void anagrammaRicorsivo(StringBuilder parziale, StringBuilder restanti) {
