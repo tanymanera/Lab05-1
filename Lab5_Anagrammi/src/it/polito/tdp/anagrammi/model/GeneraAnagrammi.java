@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import it.polito.tdp.anagrammi.db.ParolaDAO;
-import javafx.concurrent.Task;
 
 public class GeneraAnagrammi {
 
@@ -72,6 +71,7 @@ public class GeneraAnagrammi {
 		List<String> errati = new ArrayList<>();
 		List<String>[] result = new ArrayList[2];
 		dao = new ParolaDAO();
+		
 		StringBuilder parziale = new StringBuilder("");
 		StringBuilder restanti = new StringBuilder(parola);
 		anagrammaRicorsivo(parziale, restanti);

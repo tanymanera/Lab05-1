@@ -1,5 +1,11 @@
 package it.polito.tdp.anagrammi.controller;
 	
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.zaxxer.hikari.HikariDataSource;
+
+import it.polito.tdp.anagrammi.db.DBConnect;
 import it.polito.tdp.anagrammi.model.GeneraAnagrammi;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -23,6 +29,17 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void stop() {
+		Connection ds = DBConnect.getConnection();
+		try {
+			ds.close();
+		} catch (SQLException e) {
+			System.err.println("Errore connessione al DB");
+			throw new RuntimeException(e);
 		}
 	}
 	

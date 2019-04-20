@@ -58,9 +58,10 @@ public class AnagrammiController {
 
 			@Override
 			protected List<String>[] call() throws Exception {
-				GeneraAnagrammi genera = new GeneraAnagrammi();
-				List<String>[] result = genera.generaAnagramma(parola);
-//				updateProgress(arg0, arg1);
+//				GeneraAnagrammi genera = new GeneraAnagrammi();
+				updateProgress(-1, -1);
+				List<String>[] result = model.generaAnagramma(parola);
+				updateProgress(1, 1);
 				return result;
 			}
 
@@ -82,6 +83,8 @@ public class AnagrammiController {
 				}
 			}
 		});
+		
+		bar.progressProperty().bind(task.progressProperty());
 
 		Thread th = new Thread(task);
 		th.setDaemon(true);
