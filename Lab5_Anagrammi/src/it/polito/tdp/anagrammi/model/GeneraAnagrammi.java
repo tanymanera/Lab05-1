@@ -45,13 +45,21 @@ public class GeneraAnagrammi {
 		//B
 		for(int index = 0; index < restanti.length(); index++) {
 			char ch = restanti.charAt(index);
-			StringBuilder newParziale = new StringBuilder(parziale);
-			StringBuilder newRestanti = new StringBuilder(restanti);
-			newParziale.append(ch);
-			newRestanti.deleteCharAt(index);
-
+			
+//			StringBuilder newParziale = new StringBuilder(parziale);
+//			StringBuilder newRestanti = new StringBuilder(restanti);
+//			newParziale.append(ch);
+//			newRestanti.deleteCharAt(index);
+//
+//			//C
+//			anagrammaRicorsivo(newParziale, newRestanti);
+			
 			//C
-			anagrammaRicorsivo(newParziale, newRestanti);
+			anagrammaRicorsivo(parziale.append(ch), restanti.deleteCharAt(index));
+			//D
+			parziale.deleteCharAt(parziale.length() - 1);
+			restanti.insert(index, ch);
+		
 		
 		}
 

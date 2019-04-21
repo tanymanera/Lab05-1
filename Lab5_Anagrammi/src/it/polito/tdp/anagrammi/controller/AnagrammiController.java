@@ -36,6 +36,9 @@ public class AnagrammiController {
     private Button btnCalcolaAnagrammi;
 	
 	@FXML
+	private Button btnReset;
+	
+	@FXML
     private ProgressBar bar;
 
 	private GeneraAnagrammi model;
@@ -53,13 +56,20 @@ public class AnagrammiController {
 		}
 
 		btnCalcolaAnagrammi.setDisable(true);
+		btnReset.setDisable(true);
 		
 		Task<List<String>[]> task = new Task<List<String>[]>() {
 
 			@Override
 			protected List<String>[] call() throws Exception {
-//				GeneraAnagrammi genera = new GeneraAnagrammi();
 				updateProgress(-1, -1);
+//				In generale per non avere thread diversi che 
+//				operano sulle stesse variabili è meglio che
+//				ogni thread operi sulla sua istanza.
+//				Qui si opera su un solo thread per volta quindi è
+//				inutile.
+//				GeneraAnagrammi genera = new GeneraAnagrammi();
+//				List<String>[] result = genera.generaAnagramma(parola);
 				List<String>[] result = model.generaAnagramma(parola);
 				updateProgress(1, 1);
 				return result;
@@ -81,9 +91,11 @@ public class AnagrammiController {
 					txtErrati.appendText(errata + "\n");
 
 				}
+				
+				btnReset.setDisable(false);
 			}
 		});
-		
+		//Collego la property progress della barra a quella del task
 		bar.progressProperty().bind(task.progressProperty());
 
 		Thread th = new Thread(task);

@@ -56,7 +56,7 @@
    <bottom>
       <HBox spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleReset" text="Reset" />
+            <Button fx:id="btnReset" mnemonicParsing="false" onAction="#handleReset" text="Reset" />
             <ProgressBar fx:id="bar" prefHeight="18.0" prefWidth="497.0" progress="0.0" />
          </children>
          <padding>
