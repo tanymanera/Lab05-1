@@ -58,10 +58,10 @@ public class AnagrammiController {
 		btnCalcolaAnagrammi.setDisable(true);
 		btnReset.setDisable(true);
 		
-		Task<List<String>[]> task = new Task<List<String>[]>() {
+		Task<List<List<String>>> task = new Task<List<List<String>>>() {
 
 			@Override
-			protected List<String>[] call() throws Exception {
+			protected List<List<String>> call() throws Exception {
 				updateProgress(-1, -1);
 //				In generale per non avere thread diversi che 
 //				operano sulle stesse variabili è meglio che
@@ -70,7 +70,7 @@ public class AnagrammiController {
 //				inutile.
 //				GeneraAnagrammi genera = new GeneraAnagrammi();
 //				List<String>[] result = genera.generaAnagramma(parola);
-				List<String>[] result = model.generaAnagramma(parola);
+				List<List<String>> result = model.generaAnagramma(parola);
 				updateProgress(1, 1);
 				return result;
 			}
@@ -81,9 +81,9 @@ public class AnagrammiController {
 
 			@Override
 			public void handle(WorkerStateEvent event) {
-				List<String>[] result = task.getValue();
-				List<String> errati = result[0];
-				List<String> corretti = result[1];
+				List<List<String>> result = task.getValue();
+				List<String> errati = result.get(0);
+				List<String> corretti = result.get(1);
 				for (String corretta : corretti) {
 					txtCorretti.appendText(corretta + "\n");
 				}

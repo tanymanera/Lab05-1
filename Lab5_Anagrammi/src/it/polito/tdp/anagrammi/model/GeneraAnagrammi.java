@@ -73,28 +73,17 @@ public class GeneraAnagrammi {
 	 * 
 	 * @param parola Stringa da anagrammare - non deve contenere spazi.
 	 */
-	public List<String>[] generaAnagramma(String parola) {
+	public List<List<String>> generaAnagramma(String parola) {
 		listAnagrammi = new HashSet<String>();
-		List<String> corretti = new ArrayList<>();
-		List<String> errati = new ArrayList<>();
-		List<String>[] result = new ArrayList[2];
 		dao = new ParolaDAO();
 		
+		//parte ricerca ricorsiva e genera listAnagrammi con tutte parola.lenght()! combinazioni.
 		StringBuilder parziale = new StringBuilder("");
 		StringBuilder restanti = new StringBuilder(parola);
 		anagrammaRicorsivo(parziale, restanti);
 		
-		for(String s: listAnagrammi) {
-			if(dao.isCorrect(s)) {
-				corretti.add(s);
-			} else {
-				errati.add(s);
-			}
-		}
-		result[0] = errati;
-		result[1] = corretti;
-		
-		return result;
+		//ritorna vettore con anagrammi Errati e Corretti
+		return dao.isCorrect(listAnagrammi);
 	}
 
 }

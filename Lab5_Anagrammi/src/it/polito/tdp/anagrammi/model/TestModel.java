@@ -10,12 +10,12 @@ public class TestModel {
 	private void runTest() {
 		GeneraAnagrammi ga = new GeneraAnagrammi();
 		
-		List<String>[] result = ga.generaAnagramma("eat");
-		System.out.println(String.format("Parole corrette: %s", result[1].toString()));
-		System.out.println(String.format("Parole errate: %s", result[0].toString()));
+		List<List<String>> result = ga.generaAnagramma("eat");
+		System.out.println(String.format("Parole corrette: %s", result.get(1).toString()));
+		System.out.println(String.format("Parole errate: %s", result.get(0).toString()));
 		result = ga.generaAnagramma("atta");
-		System.out.println(String.format("Parole corrette: %s", result[1].toString()));
-		System.out.println(String.format("Parole errate: %s", result[0].toString()));
+		System.out.println(String.format("Parole corrette: %s", result.get(1).toString()));
+		System.out.println(String.format("Parole errate: %s", result.get(0).toString()));
 	}
 
 	public static void main(String[] args) {
