@@ -19,6 +19,8 @@ public class DBConnect {
 			config.setJdbcUrl(jdbcURL);
 			config.setUsername("root");
 			config.setPassword("root");
+			//come si configura la serverTimeZone = Europe/Rome???
+			
 
 			// configurazione MySQL
 			config.addDataSourceProperty("cachePrepStmts", "true");
